@@ -9,7 +9,7 @@ let x = 50,
 bounceCount = 0;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth/2, windowHeight/2);
 }
 
 function drawBall() {
