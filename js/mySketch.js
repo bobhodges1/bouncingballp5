@@ -2,29 +2,49 @@
 //It must be loaded from index.html
 //It assumes that the file "myPalettes.js" has also been loaded
 
-let currentPalette;
+let x = 50,
+  y = 50,
+  speedX = 3,
+  speedY = 3;
+bounceCount = 0;
 
 function setup() {
-    createCanvas(windowWidth, windowHeight / 2);
-    currentPalette = randomPalette();
-    noStroke();
-    background("white");
+  createCanvas(windowWidth, windowHeight);
+}
+
+function drawBall() {
+  let randomColor = color(random(255), random(255), random(255));
+  circle(x, y, 50);
+
+  if (x < 25) {
+    speedX = 3;
+    fill(randomColor);
+    bounceCount++;
+  } else if (x > width - 25) {
+    speedX = -3;
+    fill(randomColor);
+    bounceCount++;
+  }
+  if (y < 25) {
+    speedY = 3;
+    fill(randomColor);
+    bounceCount++;
+  } else if (y > height - 25) {
+    speedY = -3;
+    fill(randomColor);
+    bounceCount++;
+  }
 }
 
 function draw() {
-    fill(random(currentPalette));
-    const x = random(0, width);
-    const y = random(0, height);
-    circle(x, y, 100);
-}
+  background(0);
+  drawBall();
+  textSize(30);
+  textAlign(CENTER, CENTER);
+  text("Bounces: " + bounceCount, width / 2, height / 2);
 
-function mouseClicked() {
-    background(255);
-    currentPalette = randomPalette();
-}
-
-function keyPressed() {
-    if (key === "s") {
-        save("my-p5-screenshot");
-    }
+  x + 2;
+  y + 2;
+  x += speedX;
+  y += speedY;
 }
